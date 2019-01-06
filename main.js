@@ -114,15 +114,15 @@ class Slider {
 
     this.setState({ isClickable: false });
 
-    const isLastSlide = activeSlideIndex === this.len - 1;
-    const isFirstSlide = activeSlideIndex === 0;
-
     let newSlideIndex = activeSlideIndex + change;
+
+    const isLastSlide = newSlideIndex > this.len - 1;
+    const isFirstSlide = newSlideIndex < 0;
 
     if (isFirstSlide || isLastSlide) {
       newSlideIndex = isFirstSlide ? this.len - 1 : 0;
       const newTrackPosition = this.getNewTrackPosition(
-        isFirstSlide ? this.rightFictiveSlide : this.leftFictiveSlide
+        isFirstSlide ? this.leftFictiveSlide : this.rightFictiveSlide
       );
       
       this.setTrackPosition(newTrackPosition, {
