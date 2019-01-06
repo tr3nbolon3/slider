@@ -113,27 +113,25 @@ class Slider {
     }
 
     this.setState({ isClickable: false });
+
+    const isLastSlide = activeSlideIndex === this.len - 1;
+    const isFirstSlide = activeSlideIndex === 0;
+
     let newSlideIndex = activeSlideIndex + change;
 
-    if (newSlideIndex < 0) {
-      newSlideIndex = this.len - 1;
-      const newTrackPosition = this.getNewTrackPosition(this.leftFictiveSlide);
+    if (isFirstSlide || isLastSlide) {
+      newSlideIndex = isFirstSlide ? this.len - 1 : 0;
+      const newTrackPosition = this.getNewTrackPosition(
+        isFirstSlide ? this.leftFictiveSlide : this.rightFictiveSlide
+      );
+      
       this.setTrackPosition(newTrackPosition, {
         callback: () => {
           const animationDuration = 0;
           this.setActiveSlide(newSlideIndex, animationDuration);
         }
       });
-      return;
-    } else if (newSlideIndex > this.len - 1) {
-      newSlideIndex = 0;
-      const newTrackPosition = this.getNewTrackPosition(this.rightFictiveSlide);
-      this.setTrackPosition(newTrackPosition, {
-        callback: () => {
-          const animationDuration = 0;
-          this.setActiveSlide(newSlideIndex, animationDuration);
-        }
-      });
+
       return;
     }
 
