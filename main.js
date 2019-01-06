@@ -122,7 +122,7 @@ class Slider {
     if (isFirstSlide || isLastSlide) {
       newSlideIndex = isFirstSlide ? this.len - 1 : 0;
       const newTrackPosition = this.getNewTrackPosition(
-        isFirstSlide ? this.leftFictiveSlide : this.rightFictiveSlide
+        isFirstSlide ? this.rightFictiveSlide : this.leftFictiveSlide
       );
       
       this.setTrackPosition(newTrackPosition, {
